@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <!-- External font-awesome file -->
+    <head>
+        <css src="ChintakExtensions_PromotionBar::css/font-awesome.min.css" />
+        <css src="ChintakExtensions_PromotionBar::css/bootstrap.min.css" />
+        <css src="ChintakExtensions_PromotionBar::css/owl.carousel.css"/>
+        <css src="ChintakExtensions_PromotionBar::css/owl.theme.css"/>
+        
+        <link src="ChintakExtensions_PromotionBar::js/jquery.min.js"/>
+        <link src="ChintakExtensions_PromotionBar::js/bootstrap.bundle.min.js"/>        
+        
+    </head>
+    <!-- Create Header for Promotion bar -->
+    <referenceContainer name="header.container">
+        <container name="header.containertwo" as="header_containertwo" label="Page Header Container"  htmlTag="header" htmlClass="header-mini-container" before="header.panel.wrapper"/>
+    </referenceContainer>
+    <referenceContainer name="header.containertwo">
+        <block class="Magento\Framework\View\Element\Template" name="header.mini.container" template="ChintakExtensions_PromotionBar::top_promotionbar.phtml" ifconfig="promotionbar/general/enabled" cacheable="false"/>
+    </referenceContainer>
+
+    <!-- Create Footer for Promotion bar -->
+    <referenceContainer name="page.wrapper">
+        <container name="footer-containertwo" as="footer-promotionbar" after="-" label="Page Footer Container" htmlTag="div" htmlClass="page-footer-promotionbar"/>
+    </referenceContainer>
+    <referenceContainer name="footer-containertwo">
+        <block class="Magento\Framework\View\Element\Template" name="footer.mini.container" template="ChintakExtensions_PromotionBar::bottom_promotionbar.phtml" ifconfig="promotionbar/general/enabled" cacheable="false"/>
+    </referenceContainer>
+</page>

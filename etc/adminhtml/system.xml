@@ -1,0 +1,132 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+    <tab id="chintakextensions" translate="label" sortOrder="2001"><label>Chintak Extensions</label></tab> 
+        <section id="promotionbar" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Promotionbar</label>
+            <tab>chintakextensions</tab>
+            <resource>ChintakExtensions_PromotionBar::promotionbar_config</resource>
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General Configuration</label>
+                <field id="enabled" type="select" translate="label,comment,tooltip" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <config_path>promotionbar/general/enabled</config_path>
+                    <comment><![CDATA[Select <strong>Yes</strong> to enable this module]]></comment>
+                  <tooltip>PromotionBar allows stores online display notifications, promotion campaigns easily via small bars on the top and bottom of the pages</tooltip>
+                </field>
+                <field id="close_btn" type="select" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Close Button</label>
+                    <source_model>ChintakExtensions\PromotionBar\Model\Config\Source\Onoff</source_model>
+                    <config_path>promotionbar/general/close</config_path>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="multi_text" translate="label comment" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Exclude Text</label>
+                    <frontend_model>ChintakExtensions\PromotionBar\Block\Adminhtml\Config\Field\Text</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                    <config_path>promotionbar/general/multi_text</config_path>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="auto_hide" translate="label" type="text" sortOrder="4" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Auto Hide Promotion Bar (In Seconds)</label>
+                    <config_path>promotionbar/general/hide</config_path>
+                    <comment>Auto Hide Promotion Bar After you added seconds</comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+            <group id="textstyle" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="2">
+                <label>Display Text Style/Formation </label>
+                <field id="position" translate="label" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Display On</label>
+                    <source_model>ChintakExtensions\PromotionBar\Model\Config\Source\Position</source_model>
+                    <config_path>promotionbar/textstyle/position</config_path>
+                    <depends>
+                        <field id="promotionbar/general/enabled">1</field>
+                    </depends>
+                </field>
+                
+
+                <field id="slider" type="select" translate="label" sortOrder="11" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Text On Slider</label>
+                    <source_model>ChintakExtensions\PromotionBar\Model\Config\Source\SliderOnOff</source_model>
+                    <config_path>promotionbar/textstyle/slider</config_path>
+                    <depends>
+                        <field id="promotionbar/general/enabled">1</field>
+                    </depends>
+                </field>
+                <field id="scroll_text" type="select" translate="label" sortOrder="12" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Scroll Text</label>
+                    <source_model>ChintakExtensions\PromotionBar\Model\Config\Source\ScrollOnOff</source_model>
+                    <config_path>promotionbar/textstyle/scroll</config_path>
+                    <depends>
+                        <field id="promotionbar/textstyle/slider">off</field>
+                        <field id="promotionbar/general/enabled">1</field>
+                    </depends>
+                </field>
+                <field id="slider_btn" type="select" translate="label" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Slider Button(Next and Previous)</label>
+                    <source_model>ChintakExtensions\PromotionBar\Model\Config\Source\SliderBtnOnOff</source_model>
+                    <config_path>promotionbar/textstyle/sliderbtn</config_path>
+                    <depends>
+                        <field id="promotionbar/textstyle/slider">on</field>
+                        <field id="promotionbar/general/enabled">1</field>
+                    </depends>
+                </field>
+
+                <field id="text_alignment" translate="label" type="select" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Text Alignment</label>
+                    <source_model>ChintakExtensions\PromotionBar\Model\Config\Source\Alignment</source_model>
+                    <config_path>promotionbar/textstyle/text_alignment</config_path>
+                    <depends>
+                        <field id="promotionbar/general/enabled">1</field>
+                    </depends>
+                </field>
+                <field id="font_size" translate="label" type="text" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Font Size</label>
+                    <config_path>promotionbar/textstyle/font_size</config_path>
+                    <depends>
+                        <field id="promotionbar/general/enabled">1</field>
+                    </depends>
+                </field>
+                <field id="color" translate="label" type="text" sortOrder="6" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Text Color</label>
+                    <comment><![CDATA[Text color]]></comment>
+                    <frontend_model>ChintakExtensions\PromotionBar\Block\Color</frontend_model>
+                    <config_path>promotionbar/textstyle/color</config_path>
+                    <depends>
+                        <field id="promotionbar/general/enabled">1</field>
+                    </depends>
+                </field>
+                <field id="background_color" translate="label" type="text" sortOrder="8" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Background Color</label>
+                    <comment><![CDATA[Background color]]></comment>
+                    <frontend_model>ChintakExtensions\PromotionBar\Block\Color</frontend_model>
+                    <config_path>promotionbar/textstyle/bg_color</config_path>
+                    <depends>
+                        <field id="promotionbar/general/enabled">1</field>
+                    </depends>
+                </field>
+                <field id="custom_css" translate="label" type="textarea" sortOrder="9" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Custom CSS</label>
+                    <comment><![CDATA[Type in your custom styles , e.g.:<br/>
+                            <em>.page { padding: 0; margin: 0; }<br/>
+                            .main { font-size: 14px; font-weight:400; }
+                            </em>
+                            ]]></comment>
+                    <config_path>promotionbar/textstyle/custom_css</config_path>
+                    <depends>
+                        <field id="promotionbar/general/enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

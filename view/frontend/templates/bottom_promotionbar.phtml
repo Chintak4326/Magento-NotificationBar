@@ -1,0 +1,19 @@
+<?php
+$display_text = $this->helper('ChintakExtensions\PromotionBar\Helper\Data')->getTitle();
+$position = $this->helper('ChintakExtensions\PromotionBar\Helper\Data')->getPosition();
+$alignment = $this->helper('ChintakExtensions\PromotionBar\Helper\Data')->getAlignment();
+$color = $this->helper('ChintakExtensions\PromotionBar\Helper\Data')->getColor();
+$background_color = $this->helper('ChintakExtensions\PromotionBar\Helper\Data')->getBackgroundcolor();
+$font_size = $this->helper('ChintakExtensions\PromotionBar\Helper\Data')->getFont();
+$custom_css = $this->helper('ChintakExtensions\PromotionBar\Helper\Data')->getCustomcss();
+?>
+
+<style>
+    <?= $custom_css; ?>
+</style>
+
+<?php if($position == "footer"): ?>
+    <div class="footer_promotionbnar" style="font-size:<?= $font_size; ?>; background-color: <?= $background_color; ?>; text-align: <?= $alignment; ?>; color: <?= $color; ?>;">
+        <?= $display_text;?>
+    </div>
+<?php endif; ?>

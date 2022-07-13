@@ -1,0 +1,206 @@
+<?php
+
+use Magento\TestFramework\Utility\ChildrenClassesSearch\E;
+
+$display_text = $this->helper('ChintakExtensions\PromotionBar\Helper\Data')->getTitle();
+$alignment = $this->helper('ChintakExtensions\PromotionBar\Helper\Data')->getAlignment();
+$position = $this->helper('ChintakExtensions\PromotionBar\Helper\Data')->getPosition();
+$color = $this->helper('ChintakExtensions\PromotionBar\Helper\Data')->getColor();
+$background_color = $this->helper('ChintakExtensions\PromotionBar\Helper\Data')->getBackgroundcolor();
+$font_size = $this->helper('ChintakExtensions\PromotionBar\Helper\Data')->getFont();
+$custom_css = $this->helper('ChintakExtensions\PromotionBar\Helper\Data')->getCustomcss();
+$closeOn = $this->helper('ChintakExtensions\PromotionBar\Helper\Data')->isCloseOn();
+$ScrollOn = $this->helper('ChintakExtensions\PromotionBar\Helper\Data')->isScrollOn();
+$SliderOn = $this->helper('ChintakExtensions\PromotionBar\Helper\Data')->isSliderOn();
+$SliderBtnOn = $this->helper('ChintakExtensions\PromotionBar\Helper\Data')->isSliderBtnOn();
+$AutoHide = $this->helper('ChintakExtensions\PromotionBar\Helper\Data')->getAutoHide();
+$MultiText = $this->helper('ChintakExtensions\PromotionBar\Helper\Data')->getMultiText();
+
+$a = json_decode($MultiText, true);
+?>
+<style>
+    <?= $custom_css; ?>
+</style>
+
+<?php
+if ($position == "header") :
+    if ($closeOn == "on") { ?>
+        <div class="header_promotionbnar" style="font-size:<?= $font_size; ?>; background-color: <?= $background_color; ?>; text-align: <?= $alignment; ?>; color: <?= $color; ?>;">
+            <?php if ($SliderOn == "on") {
+                if ($SliderBtnOn == "on"){
+            ?>
+                <div class="position-absolute top-0 start-0">
+                    <i class="fa fa-angle-left customPrevBtn" style="font-size:24px; margin-left:30px;"></i>
+                </div>
+                <?php } ?>
+                <div class="carousel-wrap" style="margin:0px 55px;">
+                    <div class="owl-carousel">
+                        <?php
+                        foreach ($a as $b) {
+                        ?>
+                            <div class="item"><?php echo $b['text']; ?></div>
+                        <?php
+                        }
+                        ?>
+                    </div>
+                </div>
+
+                <div class="position-absolute top-0 end-0">
+                    <?php  if ($SliderBtnOn == "on"){ ?>
+                    <i class="fa fa-angle-right customNextBtn" style="font-size:24px; margin-right:20px;"></i>
+                    <?php } ?>
+                    <i class="fa fa-close customClose" style="font-size:25px;" id='close' style="cursor:pointer;"></i>
+                </div>
+                <?php
+            } else {
+                if ($ScrollOn == "on") {
+                    foreach ($a as $b) {
+                ?>
+                        <div class="row" style="display: flex; width: 100%;">
+                            <div class="col" style="width: 95%;">
+                                <marquee behavior="scroll" direction="left"><?= $b['text']; ?></marquee>
+                            </div>
+                            <div class="col" style="width: 5%;"><i class="fa fa-close customClose" style="font-size:25px;" id='close' style="cursor:pointer;"></i></div>
+                        </div>
+                    <?php
+                    }
+                } else {
+                    foreach ($a as $b) {
+                    ?>
+                        <div class="row" style="display: flex; width: 100%;">
+                            <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                            <div class="col" style="width: 95%;"><?= $b['text']; ?></div>
+                            <div class="col" style="width: 5%;"><i class="fa fa-close customClose" style="font-size:25px;" id='close' style="cursor:pointer;"></i></div>
+                        </div>
+            <?php
+                    }
+                }
+            }
+            ?>
+        </div>
+    <?php
+    } else {
+    ?>
+        <div class="header_promotionbnar" style="font-size:<?= $font_size; ?>; background-color: <?= $background_color; ?>; text-align: <?= $alignment; ?>; color: <?= $color; ?>;">
+            <?php
+            if ($SliderOn == "on") {
+                if ($SliderBtnOn == "on"){
+                    ?>
+                        <div class="position-absolute top-0 start-0">
+                            <i class="fa fa-angle-left customPrevBtn" style="font-size:24px; margin-left:30px;"></i>
+                        </div>
+                        <?php } ?>
+                <div class="carousel-wrap">
+                    <div class="owl-carousel">
+                        <?php
+                        foreach ($a as $b) {
+                        ?>
+                            <div class="item">
+                                <?php echo $b['text']; ?>
+                            </div>
+                        <?php
+                        } ?>
+                    </div>
+                </div>
+                <div class="position-absolute top-0 end-0">
+                    <?php  if ($SliderBtnOn == "on"){ ?>
+                    <i class="fa fa-angle-right customNextBtn" style="font-size:24px; margin-right:30px;"></i>
+                    <?php } ?>
+                </div>
+                <?php
+            } else {
+                if ($ScrollOn == "on") {
+
+                    foreach ($a as $b) {
+                ?>
+                        <marquee behavior="scroll" direction="left"><?= $b['text']; ?></marquee>
+                    <?php
+                    }
+                } else {
+                    foreach ($a as $b) {
+                    ?>
+                        <div class="item"><?php echo $b['text']; ?></div>
+            <?php
+                    }
+                }
+            } ?>
+        </div>
+    <?php
+    }
+    ?>
+<?php endif; ?>
+
+<style type="text/css">
+    .alert .message .customClose {
+        display: block;
+    }
+
+    .alert .customClose {
+        display: none;
+    }
+</style>
+
+<script>
+    require(['jquery', 'myscript'], function($, myscript) {
+        myscript();
+    });
+</script>
+
+
+<script>
+    const second = <?php echo $AutoHide; ?> * 1000;
+
+    require(['jquery', 'jquery/ui'], function($) {
+        $(document).ready(function() {
+            setTimeout(function() {
+                $(".header_promotionbnar").remove();
+            }, second);
+        });
+    });
+</script>
+
+<script>
+    require(['jquery', 'owlcarousel'], function($) {
+        $(document).ready(function() {
+            $('.owl-carousel').owlCarousel({
+                loop: true,
+                margin: 10,
+                nav: false,
+                dots: false,
+                autoplayTimeout: 5000,
+                autoplay: true,
+                autoplayHoverPause: true,
+                responsive: {
+                    0: {
+                        items: 1
+                    }
+                }
+            });
+        });
+    });
+
+    require(['jquery', 'jquery/ui'], function($) {
+
+        $(document).ready(function() {
+            $(".customClose").click(function() {
+                $(".header_promotionbnar").remove();
+            });
+
+
+            var owl = $('.owl-carousel');
+            owl.owlCarousel();
+            // Go to the next item
+            $('.customNextBtn').click(function() {
+                owl.trigger('next.owl.carousel');
+            })
+            // Go to the previous item
+            $('.customPrevBtn').click(function() {
+                // With optional speed parameter
+                // Parameters has to be in square bracket '[]'
+                owl.trigger('prev.owl.carousel', [300]);
+            })
+
+        });
+
+    });
+</script>

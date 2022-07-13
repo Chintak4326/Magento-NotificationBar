@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <promotionbar>
+            <general>
+                <enabled>1</enabled>
+                <display_text>Promotion bar text here</display_text>
+                <position></position>
+                <text_alignment></text_alignment>
+                <font_size>12px</font_size>
+                <color></color>
+                <background_color></background_color>
+                <custom_css><![CDATA[]]></custom_css>
+            </general>
+        </promotionbar>
+    </default>
+</config>
